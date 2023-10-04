@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\00_main">
+      <UniqueIdentifier>{a28705e4-58d7-4840-9667-2d5bce689808}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\02_system">
+      <UniqueIdentifier>{f7470dde-36d8-42f1-abf1-3c1fc2c25169}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\01_object">
+      <UniqueIdentifier>{44cac2dc-a318-4839-855c-fcbb1aa419c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\02_system\00_imgui">
+      <UniqueIdentifier>{22238864-82a7-48cf-931d-14451a01f2a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\02_system\01_renderer">
+      <UniqueIdentifier>{30b3912a-6356-4e5b-8ac7-3c08096a9d6b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="code\main.cpp">
+      <Filter>ソース ファイル\00_main</Filter>
+    </ClCompile>
+    <ClCompile Include="code\manager.cpp">
+      <Filter>ソース ファイル\00_main</Filter>
+    </ClCompile>
+    <ClCompile Include="code\object\block.cpp">
+      <Filter>ソース ファイル\01_object</Filter>
+    </ClCompile>
+    <ClCompile Include="code\object\model.cpp">
+      <Filter>ソース ファイル\01_object</Filter>
+    </ClCompile>
+    <ClCompile Include="code\object\object.cpp">
+      <Filter>ソース ファイル\01_object</Filter>
+    </ClCompile>
+    <ClCompile Include="code\object\objectX.cpp">
+      <Filter>ソース ファイル\01_object</Filter>
+    </ClCompile>
+    <ClCompile Include="code\input.cpp">
+      <Filter>ソース ファイル\02_system</Filter>
+    </ClCompile>
+    <ClCompile Include="code\physics.cpp">
+      <Filter>ソース ファイル\02_system</Filter>
+    </ClCompile>
+    <ClCompile Include="code\texture.cpp">
+      <Filter>ソース ファイル\02_system</Filter>
+    </ClCompile>
+    <ClCompile Include="code\camera.cpp">
+      <Filter>ソース ファイル\02_system\01_renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="code\light.cpp">
+      <Filter>ソース ファイル\02_system\01_renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="code\renderer.cpp">
+      <Filter>ソース ファイル\02_system\01_renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="code\object\set_block.cpp">
+      <Filter>ソース ファイル\01_object</Filter>
+    </ClCompile>
+    <ClCompile Include="code\imgui\imgui.cpp">
+      <Filter>ソース ファイル\02_system\00_imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="code\imgui\imgui_demo.cpp">
+      <Filter>ソース ファイル\02_system\00_imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="code\imgui\imgui_draw.cpp">
+      <Filter>ソース ファイル\02_system\00_imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="code\imgui\imgui_impl_dx9.cpp">
+      <Filter>ソース ファイル\02_system\00_imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="code\imgui\imgui_impl_win32.cpp">
+      <Filter>ソース ファイル\02_system\00_imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="code\imgui\imgui_tables.cpp">
+      <Filter>ソース ファイル\02_system\00_imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="code\imgui\imgui_widgets.cpp">
+      <Filter>ソース ファイル\02_system\00_imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="code\imgui_block.cpp">
+      <Filter>ソース ファイル\02_system</Filter>
+    </ClCompile>
+    <ClCompile Include="code\object\fcst_block.cpp">
+      <Filter>ソース ファイル\01_object</Filter>
+    </ClCompile>
+    <ClCompile Include="code\csv_file.cpp">
+      <Filter>ソース ファイル\02_system</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="code\main.h">
+      <Filter>ソース ファイル\00_main</Filter>
+    </ClInclude>
+    <ClInclude Include="code\manager.h">
+      <Filter>ソース ファイル\00_main</Filter>
+    </ClInclude>
+    <ClInclude Include="code\object\block.h">
+      <Filter>ソース ファイル\01_object</Filter>
+    </ClInclude>
+    <ClInclude Include="code\object\model.h">
+      <Filter>ソース ファイル\01_object</Filter>
+    </ClInclude>
+    <ClInclude Include="code\object\object.h">
+      <Filter>ソース ファイル\01_object</Filter>
+    </ClInclude>
+    <ClInclude Include="code\object\objectX.h">
+      <Filter>ソース ファイル\01_object</Filter>
+    </ClInclude>
+    <ClInclude Include="code\input.h">
+      <Filter>ソース ファイル\02_system</Filter>
+    </ClInclude>
+    <ClInclude Include="code\physics.h">
+      <Filter>ソース ファイル\02_system</Filter>
+    </ClInclude>
+    <ClInclude Include="code\texture.h">
+      <Filter>ソース ファイル\02_system</Filter>
+    </ClInclude>
+    <ClInclude Include="code\camera.h">
+      <Filter>ソース ファイル\02_system\01_renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="code\light.h">
+      <Filter>ソース ファイル\02_system\01_renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="code\renderer.h">
+      <Filter>ソース ファイル\02_system\01_renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="code\object\set_block.h">
+      <Filter>ソース ファイル\01_object</Filter>
+    </ClInclude>
+    <ClInclude Include="code\imgui\imconfig.h">
+      <Filter>ソース ファイル\02_system\00_imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="code\imgui\imgui.h">
+      <Filter>ソース ファイル\02_system\00_imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="code\imgui\imgui_impl_dx9.h">
+      <Filter>ソース ファイル\02_system\00_imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="code\imgui\imgui_impl_win32.h">
+      <Filter>ソース ファイル\02_system\00_imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="code\imgui\imgui_internal.h">
+      <Filter>ソース ファイル\02_system\00_imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="code\imgui\imstb_rectpack.h">
+      <Filter>ソース ファイル\02_system\00_imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="code\imgui\imstb_textedit.h">
+      <Filter>ソース ファイル\02_system\00_imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="code\imgui\imstb_truetype.h">
+      <Filter>ソース ファイル\02_system\00_imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="code\imgui_block.h">
+      <Filter>ソース ファイル\02_system</Filter>
+    </ClInclude>
+    <ClInclude Include="code\object\fcst_block.h">
+      <Filter>ソース ファイル\01_object</Filter>
+    </ClInclude>
+    <ClInclude Include="code\csv_file.h">
+      <Filter>ソース ファイル\02_system</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
