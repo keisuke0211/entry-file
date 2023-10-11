@@ -37,8 +37,11 @@ https://www.youtube.com/watch?v=ydgh8ISU4-g&list=PLAqkWz4l3qow_9FtG3154mrwcailIr
 
 ◆ 04_pixel ================================================
 使用言語 : C++
-開発期間 : 2023年07月～現在
+開発期間 : 2023年07月～9月末(約3か月)
 ジャンル : ３Ｄパズル
+
+ ◆ プレイ動画 ◆
+ https://www.youtube.com/watch?v=3rHjSO5aHv4
 
 ◇作品説明.txt
 このファイルです。
