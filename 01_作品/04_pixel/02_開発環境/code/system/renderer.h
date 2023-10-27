@@ -17,6 +17,17 @@ class CRenderer
 {
 public:
 
+	/* 定義 */
+	const DWORD FVF_VERTEX_2D = (D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1);		// 頂点フォーマット【2D】
+
+	struct VERTEX_2D
+	{
+		D3DXVECTOR3 pos;	//頂点座標
+		float rhw;			//座標変換係数（1.0fで固定）
+		D3DCOLOR col;		//頂点カラー
+		D3DXVECTOR2 tex;	//テクスチャ座標
+	};
+
 	// ***** 関数 *****
 
 	CRenderer();
@@ -30,6 +41,9 @@ public:
 
 	/* 取得 */
 	LPDIRECT3DDEVICE9 GetDevice(void) { return m_pD3DDevice; }	// デバイス
+
+	void ChangeTarget(D3DXVECTOR3 posV, D3DXVECTOR3 posR, D3DXVECTOR3 vecU);
+	LPDIRECT3DTEXTURE9 GetTextureMT(void);
 
 private:
 

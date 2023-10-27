@@ -28,6 +28,7 @@
 #include "../system/camera.h"
 #include "../system/sound.h"
 #include "../scene/pause.h"
+#include "../object/model/model.h"
 #include "fade.h"
 
 // 静的変数
@@ -91,10 +92,12 @@ CGame::~CGame()
 //========================================
 HRESULT CGame::Init(void)
 {
-	CBlock::Reset();
 	CEnemy::Reset();
 	CBullet::Reset();
 	CCube::Reset();
+
+	CBlock::Load();			// ブロック
+	CModel::InitModel();	// モデル
 
 	m_rot = INIT_D3DXVECTOR3;
 	m_nStartTime = 0;
@@ -132,7 +135,7 @@ HRESULT CGame::Init(void)
 	pCamera->SetHeigth(0.4f);
 	pCamera->SetDistance(1400.0f);
 
-	CPlayer *pPlayer = CPlayer::Create(m_aStageInfo.PlayerPos[m_nStage],m_aStageInfo.PlayerRot[m_nStage]);
+	CPlayer *pPlayer = CPlayer::Create(m_aStageInfo.PlayerPos[m_nStage], m_aStageInfo.PlayerRot[m_nStage]);
 	pPlayer->SetMotion("data\\GAMEDATA\\MODEL\\Player\\PLAYER_DATA.txt");
 
 	// 敵の生成
@@ -148,9 +151,9 @@ HRESULT CGame::Init(void)
 	m_pScore = CScore::Create();
 	CScore::SetScore(m_nScore);
 
-	FormFont pFont = {INIT_D3DXCOLOR,20.0f,10,60,30};
+	FormFont pFont = { INIT_D3DXCOLOR,20.0f,10,60,30 };
 
-	FormShadow pShadow = {D3DXCOLOR(0.0f,0.0f,0.0f,1.0f),true,D3DXVECTOR3(2.0f,2.0f,0.0f),D3DXVECTOR2(1.0f,1.0f)};
+	FormShadow pShadow = { D3DXCOLOR(0.0f,0.0f,0.0f,1.0f),true,D3DXVECTOR3(2.0f,2.0f,0.0f),D3DXVECTOR2(1.0f,1.0f) };
 
 	int nCntText = 0;
 	char aString[TXT_MAX];
@@ -169,8 +172,8 @@ HRESULT CGame::Init(void)
 
 	int nStrlen = strlen(aString);
 
-	CText::Create(CText::BOX_NORMAL_RECT,D3DXVECTOR3(640.0f, 325.0f, 0.0f),D3DXVECTOR2(440.0f, 100.0f),
-		aString,CFont::FONT_BESTTEN,&pFont, false,&pShadow);
+	CText::Create(CText::BOX_NORMAL_RECT, D3DXVECTOR3(640.0f, 325.0f, 0.0f), D3DXVECTOR2(440.0f, 100.0f),
+		aString, CFont::FONT_BESTTEN, &pFont, false, &pShadow);
 
 	CText::Create(CText::BOX_NORMAL_RECT, D3DXVECTOR3(640.0f, 375.0f, 0.0f), D3DXVECTOR2(440.0f, 100.0f),
 		aCube, CFont::FONT_BESTTEN, &pFont, false, &pShadow);
@@ -189,6 +192,9 @@ HRESULT CGame::Init(void)
 //========================================
 void CGame::Uninit(void)
 {
+	CBlock::Reset();
+	CModel::UninitModel();
+
 	CObject::ReleaseAll(CObject::TYPE_BG);
 	CObject::ReleaseAll(CObject::TYPE_BLOCK);
 	CObject::ReleaseAll(CObject::TYPE_CUBE);
@@ -215,7 +221,7 @@ void CGame::Update(void)
 	CKeyboard *pInputKeyboard = CManager::GetInputKeyboard();	// キーボード
 	CJoypad *pInputJoypad = CManager::GetInputJoypad();			// ジョイパット
 
-	// ポーズ
+																// ポーズ
 	if (!m_bEnd)
 	{
 		if (pInputKeyboard->GetTrigger(DIK_P) || pInputJoypad->GetTrigger(CJoypad::JOYKEY_START))
@@ -262,7 +268,7 @@ void CGame::Update(void)
 				if (!m_bEnd || (m_bEnd && bClear && m_bGemeOver && m_nEndTime <= 0))
 				{
 					char aString[TXT_MAX];
-					D3DXCOLOR color,ShadowColor;
+					D3DXCOLOR color, ShadowColor;
 					if (m_bEnd && bClear && m_bGemeOver && m_pTime->GetTime() <= 0)
 					{
 						m_bSpecial = true;
@@ -279,15 +285,15 @@ void CGame::Update(void)
 
 					m_bEnd = true;
 
-					FormFont pFont = { color,20.0f,7,60,30};
-					FormShadow pShadow = {ShadowColor,true,D3DXVECTOR3(2.0f,2.0f,0.0f),D3DXVECTOR2(1.0f,1.0f)};
+					FormFont pFont = { color,20.0f,7,60,30 };
+					FormShadow pShadow = { ShadowColor,true,D3DXVECTOR3(2.0f,2.0f,0.0f),D3DXVECTOR2(1.0f,1.0f) };
 
 					CText::Create(CText::BOX_NORMAL_RECT,
 						D3DXVECTOR3(640.0f, 300.0f, 0.0f),
 						D3DXVECTOR2(440.0f, 100.0f),
 						aString,
 						CFont::FONT_BESTTEN,
-						&pFont, false,&pShadow);
+						&pFont, false, &pShadow);
 
 					int nLength = strlen(aString);
 
@@ -321,7 +327,7 @@ void CGame::Update(void)
 						D3DXVECTOR2(440.0f, 100.0f),
 						"GAME OVER",
 						CFont::FONT_BESTTEN,
-						&pFont, false,&pShadow);
+						&pFont, false, &pShadow);
 
 					m_nEndTime = (7 * 8) + 60 + 15;
 					m_bEnd = true;
@@ -368,8 +374,8 @@ CGame *CGame::Create(void)
 //========================================
 void CGame::Result(void)
 {
-	FormFont pFont = { INIT_D3DXCOLOR, 18.0f, 2, 5, 0};
-	FormShadow pShadow = { D3DXCOLOR(0.0f,0.0f,0.0f,1.0f), true, D3DXVECTOR3(2.0f,2.0f,0.0f), D3DXVECTOR2(2.0f,2.0f)};
+	FormFont pFont = { INIT_D3DXCOLOR, 18.0f, 2, 5, 0 };
+	FormShadow pShadow = { D3DXCOLOR(0.0f,0.0f,0.0f,1.0f), true, D3DXVECTOR3(2.0f,2.0f,0.0f), D3DXVECTOR2(2.0f,2.0f) };
 
 	char aString[TXT_MAX];
 	int nLength = 0;
@@ -409,7 +415,7 @@ void CGame::Result(void)
 		}
 		pos = D3DXVECTOR3(100.0f, 190.0f, 0.0f);
 	}
-		break;
+	break;
 	case RST_TIME_CALC:
 	{
 		int nTime = m_pTime->GetTime();
@@ -426,7 +432,7 @@ void CGame::Result(void)
 		}
 		pos = D3DXVECTOR3(100.0f, 260.0f, 0.0f);
 	}
-		break;
+	break;
 	case RST_CLEAR:
 	{
 		if (!m_bSpecial)
@@ -439,7 +445,7 @@ void CGame::Result(void)
 		}
 		pos = D3DXVECTOR3(100.0f, 340.0f, 0.0f);
 	}
-		break;
+	break;
 	case RST_CLEAR_CALC:
 	{
 		int nClear = m_aStageInfo.nClearBonus[m_nStage];
@@ -458,22 +464,22 @@ void CGame::Result(void)
 		sprintf(aString, "%d", m_nClearTotal);
 		pos = D3DXVECTOR3(100.0f, 410.0f, 0.0f);
 	}
-		break;
+	break;
 	case RST_BONUS:
 	{
 		sprintf(aString, "TOTAL BONUS");
 		pos = D3DXVECTOR3(100.0f, 500.0f, 0.0f);
 	}
-		break;
+	break;
 	case RST_BONUS_CALC:
 	{
 
 		m_nTotal = m_nTimeTotal + m_nClearTotal;
 
-		sprintf(aString, "%d",m_nTotal);
+		sprintf(aString, "%d", m_nTotal);
 		pos = D3DXVECTOR3(100.0f, 550.0f, 0.0f);
 	}
-		break;
+	break;
 	case RST_ADD_SCORE:
 	{
 		if (m_bAddScore)
@@ -490,7 +496,7 @@ void CGame::Result(void)
 					if (m_nStage != (STAGE_MAX - 1))
 					{
 						sprintf(aString, "NEXT⇒STAGE%d", m_nStage + 1);
-						 pos = D3DXVECTOR3(1000.0f, 650.0f, 0.0f);
+						pos = D3DXVECTOR3(1000.0f, 650.0f, 0.0f);
 					}
 					else if (m_nStage == (STAGE_MAX - 1))
 					{
@@ -554,7 +560,7 @@ void CGame::Result(void)
 			}
 		}
 	}
-		break;
+	break;
 	case RST_STAND:
 	{
 		if (m_nStandTime-- <= 0)
@@ -562,7 +568,7 @@ void CGame::Result(void)
 			m_nRstStgType++;
 		}
 	}
-		break;
+	break;
 	case RST_END:
 	{
 		if (m_nStage < STAGE_MAX)
@@ -579,7 +585,7 @@ void CGame::Result(void)
 			CPause::SetPause(false);
 		}
 	}
-		break;
+	break;
 	}
 
 	// テキストの生成
@@ -617,7 +623,7 @@ void CGame::Result(void)
 			}
 			m_nRstStgType++;
 		}
-	}	
+	}
 }
 
 //========================================
@@ -660,7 +666,7 @@ void CGame::LoodStage(void)
 {
 	char aDataSearch[TXT_MAX];	// データ検索用
 
-	// ファイルの読み込み
+								// ファイルの読み込み
 	FILE *pFile = fopen(STAGE_INFO_FILE, "r");
 
 	if (pFile == NULL)
@@ -771,7 +777,7 @@ void CGame::LoodSide(void)
 	char aDataSearch[128] = {};		// 文字列比較用の変数
 	char g_aEqual[128] = {};		// ＝読み込み用変数
 
-	// ファイルポインタの宣言
+									// ファイルポインタの宣言
 	FILE * pFile;
 
 	//ファイルを開く
@@ -797,7 +803,7 @@ void CGame::LoodSide(void)
 			}
 			else if (!strcmp(aDataSearch, "CREATE_SIDE"))
 			{// 生成開始
-				
+
 				while (1)
 				{
 					fscanf(pFile, "%s", aDataSearch);
@@ -829,8 +835,8 @@ void CGame::LoodSide(void)
 							{// 読み込みを終了
 
 								CBgSide *pBgSide = CBgSide::Create(
-								pos,rot,color,fHeight,fRadius,nType,nNumTex,
-									nDivisionX,nDivisionY,fTexV);
+									pos, rot, color, fHeight, fRadius, nType, nNumTex,
+									nDivisionX, nDivisionY, fTexV);
 
 								delete[] nType;
 								nType = NULL;
@@ -932,7 +938,7 @@ void CGame::LoodFloor(void)
 	char aDataSearch[128] = {};		// 文字列比較用の変数
 	char g_aEqual[128] = {};		// ＝読み込み用変数
 
-	// ファイルポインタの宣言
+									// ファイルポインタの宣言
 	FILE * pFile;
 
 	//ファイルを開く
@@ -993,7 +999,7 @@ void CGame::LoodFloor(void)
 							{// 読み込みを終了
 
 								CFloor *pBgSide = CFloor::Create(
-									pos, rot, color, fWidth,fHeight, nType, nNumTex, bDivision,
+									pos, rot, color, fWidth, fHeight, nType, nNumTex, bDivision,
 									nDivisionX, nDivisionY, fTexX, fTexY);
 
 								break;
@@ -1124,7 +1130,7 @@ void CGame::LoodBlock(void)
 		int nState;				// 状態
 		D3DXVECTOR3 pos;		// 位置
 
-		// 列数の取得
+								// 列数の取得
 		int nLineMax = pFile->GetLineSize(nRow);
 
 		for (int nLine = 0; nLine < nLineMax; nLine++)
@@ -1144,11 +1150,13 @@ void CGame::LoodBlock(void)
 		// 最大数に達したら返す
 		if (nRow == nRowMax - 1)	// (列数 - 列の最大数 - ヘッダーの列数)
 		{
+			delete pFile;
+			pFile = NULL;
 			return;
 		}
 
 		// 配置
-		CBlock *pObj = CBlock::Create(nType, pos,nState);
+		CBlock *pObj = CBlock::Create(nType, pos, nState);
 	}
 
 	// メモリ開放
@@ -1198,6 +1206,8 @@ void CGame::LoodEnemy(void)
 		// 最大数に達したら返す
 		if (nRow == nRowMax - 1)	// (列数 - 列の最大数 - ヘッダーの列数)
 		{
+			delete pFile;
+			pFile = NULL;
 			return;
 		}
 

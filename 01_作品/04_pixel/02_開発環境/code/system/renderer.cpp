@@ -167,14 +167,14 @@ void CRenderer::Draw(void)
 	if (SUCCEEDED(m_pD3DDevice->BeginScene()))
 	{//描画開始が成功した場合
 
-		// オブジェクト全体の描画処理
+	 // オブジェクト全体の描画処理
 		CObject::DrawAll();
 
 		//描画終了
 		m_pD3DDevice->EndScene();
 
 #ifdef _DEBUG
-		
+
 		//FPSの表示
 		DrawFPS();
 

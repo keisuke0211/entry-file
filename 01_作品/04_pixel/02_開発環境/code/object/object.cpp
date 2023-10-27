@@ -268,6 +268,7 @@ void CObject::DrawAll(void)
 		// 先頭オブジェクト
 		CObject *pObj = m_apTop[nPrio];
 
+
 		// オブジェクト分の回す
 		while (pObj != NULL)
 		{
@@ -277,7 +278,6 @@ void CObject::DrawAll(void)
 				// 描画処理
 				pObj->Draw();
 			}
-
 			// 次のオブジェクトがあるかどうか、
 			if (pObj->m_pNext == NULL)
 			{
