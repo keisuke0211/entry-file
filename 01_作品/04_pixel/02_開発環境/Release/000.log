@@ -100,5 +100,5 @@ code\system\renderer.cpp(193): warning C4244: '初期化中': 'float' から 'LO
   コード生成しています。
   All 1372 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   コード生成が終了しました。
-  000.vcxproj -> C:\Users\student\OneDrive\デスクトップ\就活関連\就活\吉田学園情報ビジネス専門学校_大殿慶輔\01_作品\04_pixel\02_開発環境\000.exe
-  000.vcxproj -> C:\Users\student\OneDrive\デスクトップ\就活関連\就活\吉田学園情報ビジネス専門学校_大殿慶輔\01_作品\04_pixel\02_開発環境\000.pdb (Full PDB)
+  000.vcxproj -> C:\Users\student\OneDrive\デスクトップ\就活関連\作品類\ブレパズ\02_開発環境\000.exe
+  000.vcxproj -> C:\Users\student\OneDrive\デスクトップ\就活関連\作品類\ブレパズ\02_開発環境\000.pdb (Full PDB)
